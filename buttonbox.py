@@ -20,14 +20,11 @@ from types import *
 from time import *
 from widget import *
 
-class TileboxBase(Widget):
+class Buttonbox(Widget):
     ""
     def __init__(self,xx,yy,relx,rely,ww,hh):
         Widget.__init__(self,xx,yy,ww,hh)
-	self.tiles = []
-#        self.relativex = xx
-#        self.relativey = yy 
-        self.bgimage = pygame.image.load("./pics/levelmaker-border-1-300x600.bmp").convert()
+        self.bgimage = pygame.image.load("./pics/levelmaker-border-2-150x300.bmp").convert()
 	self.bgoffsetx = 20 
 	self.bgoffsety = 20 
 
@@ -36,37 +33,11 @@ class TileboxBase(Widget):
         screen.blit(self.bgimage, (self.x, self.y))
 	Widget.draw(self, screen)	
 
-	for w in self.tiles:
+	for w in self.list:
 		w.draw(screen)
 
-    def addtile(self, t):
-	self.tiles.append(t)
+    def doclick(self):
+	1
 
-    def undomove(self):
-        if self.direction == "north":
-            self.movedown()
-        elif self.direction == "south":
-            self.moveup()
-        elif self.direction == "west":
-            self.moveright()
-        elif self.direction == "east":
-            self.moveleft()
-
-    def moveup(self):
-        self.direction = "north"
-        self.relativey = self.relativey - 10
-
-    def movedown(self):
-        self.direction = "south"
-        self.relativey = self.relativey + 10
-
-    def moveleft(self):
-        self.direction = "west"
-        self.relativex = self.relativex - 10
-	### print "relx=%d" % self.relativex
-	
-    def moveright(self):
-	if self.relativex >= 0:
-		self.moveleft()
-        self.direction = "east"
-        self.relativex = self.relativex + 10
+    def dounclick(self):
+	1

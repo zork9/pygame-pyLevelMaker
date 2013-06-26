@@ -18,6 +18,7 @@ import pygame
 from pygame.locals import *
 
 from map import *
+from buttonbox import *
 from tilebox import *
 from tile import *
 from rootwidget import *
@@ -40,6 +41,7 @@ class Game:
 	self.selectedtile = None
 	self.tileboxw = 300
 	self.tilebox = Tilebox(self.screenwidth-self.tileboxw,768-600,self.tileboxw,0,self.tileboxw,self.screenheight)
+	self.buttonbox = Buttonbox(self.screenwidth-self.tileboxw,0,0,0,150,300)
 	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.1,"./pics/tile-tree-1-16x16.bmp"))
 	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.2,"./pics/tile-tree-2-16x16.bmp"))
 	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.3,"./pics/tile-tree-3-16x16.bmp"))
@@ -48,27 +50,28 @@ class Game:
 	self.tilebox.sort()
 	self.map = Map(0,0,0,0,1024,768)
 	### self.rootwidget.add(self.map)
-	### self.rootwidget.add(self.tilebox)
 	self.rootwidget = RootWidget(0,0,0,0,self.screenwidth,self.screenheight)
+	self.rootwidget.add(self.buttonbox)
+
 	### FIX split args into procedures
 
-	self.upbutton = TextButton(20 + self.screenwidth - 280,0,0,0,16,16,"./pics/tile-tree-1-16x16.bmp","./pics/tile-tree-2-16x16.bmp",self.font,"Up")
+	self.upbutton = TextButton(20 + self.screenwidth - 280,0,0,0,16,16,"./pics/button-64x32.bmp","./pics/button-2-64x32.bmp",self.font,"Up")
 	self.upbutton.connect(self.scrollup, None)	
 	self.rootwidget.add(self.upbutton)
 
-	self.downbutton = TextButton(40 + self.screenwidth - 280 + 16,0,0,0,16,16,"./pics/tile-tree-1-16x16.bmp","./pics/tile-tree-2-16x16.bmp",self.font,"Down")
+	self.downbutton = TextButton(40 + self.screenwidth - 280 + 16,0,0,0,16,16,"./pics/button-64x32.bmp","./pics/button-2-64x32.bmp",self.font,"Down")
 	self.downbutton.connect(self.scrolldown, None)	
 	self.rootwidget.add(self.downbutton)
 
-	self.leftbutton = TextButton(60 + self.screenwidth - 280 + 16 + 16,0,0,0,16,16,"./pics/tile-tree-1-16x16.bmp","./pics/tile-tree-2-16x16.bmp",self.font,"Left")
+	self.leftbutton = TextButton(60 + self.screenwidth - 280 + 16 + 16,0,0,0,16,16,"./pics/button-64x32.bmp","./pics/button-2-64x32.bmp",self.font,"Left")
 	self.leftbutton.connect(self.scrollleft, None)	
 	self.rootwidget.add(self.leftbutton)
 
-	self.rightbutton = TextButton(80 + self.screenwidth - 280 + 16 + 16 + 16,0,0,0,16,16,"./pics/tile-tree-1-16x16.bmp","./pics/tile-tree-2-16x16.bmp",self.font,"Right")
+	self.rightbutton = TextButton(80 + self.screenwidth - 280 + 16 + 16 + 16,0,0,0,16,16,"./pics/button-64x32.bmp","./pics/button-2-64x32.bmp",self.font,"Right")
 	self.rightbutton.connect(self.scrollright, None)	
 	self.rootwidget.add(self.rightbutton)
 
-	self.printbutton = TextButton(100 + self.screenwidth - 280 + 16 + 16 + 16 + 16,0,0,0,16,16,"./pics/tile-tree-1-16x16.bmp","./pics/tile-tree-2-16x16.bmp",self.font,"Print")
+	self.printbutton = TextButton(100 + self.screenwidth - 280 + 16 + 16 + 16 + 16,0,0,0,16,16,"./pics/button-64x32.bmp","./pics/button-2-64x32.bmp",self.font,"Print")
 	self.rightbutton.connect(self.printtoconsole, None)	
 	self.rootwidget.add(self.printbutton)
 
@@ -106,6 +109,7 @@ class Game:
 					self.selectedtile = self.tilebox.get(pos[0],pos[1])
 				if pos[0] > self.tilebox.x and pos[1] < self.tilebox.y:
 					self.rootwidget.click(pos[0],pos[1])
+
                		if event.type == pygame.MOUSEBUTTONUP:
 				sleep(0.2)
 				pos = pygame.mouse.get_pos()
@@ -113,6 +117,7 @@ class Game:
 				self.rootwidget.unclick(self.prevpos0,self.prevpos1)
 				###self.rootwidget.unclick(pos[0],pos[1])
 	
+            	screen.blit(blankimage, (0,0))
 		self.map.draw(screen,self.tilebox)
 		self.tilebox.draw(screen)
 		self.rootwidget.draw(screen)

@@ -21,7 +21,7 @@ from time import *
 from widget import *
 
 class Utility:
-    "Room with a (big) map"
+    ""
     def __init__(self):
     	self.images = []
 
