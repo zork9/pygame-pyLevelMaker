@@ -55,24 +55,24 @@ class Game:
 
 	### FIX split args into procedures
 
-	self.upbutton = TextButton(20 + self.screenwidth - 280,0,0,0,16,16,"./pics/button-64x32.bmp","./pics/button-2-64x32.bmp",self.font,"Up")
+	self.upbutton = TextButton(self.screenwidth - self.tileboxw,0,0,0,64,32,"./pics/button-64x32.bmp","./pics/button-2-64x32.bmp",self.font,"Up")
 	self.upbutton.connect(self.scrollup, None)	
 	self.rootwidget.add(self.upbutton)
 
-	self.downbutton = TextButton(40 + self.screenwidth - 280 + 16,0,0,0,16,16,"./pics/button-64x32.bmp","./pics/button-2-64x32.bmp",self.font,"Down")
+	self.downbutton = TextButton(64 + self.screenwidth - self.tileboxw ,0,0,0,64,32,"./pics/button-64x32.bmp","./pics/button-2-64x32.bmp",self.font,"Down")
 	self.downbutton.connect(self.scrolldown, None)	
 	self.rootwidget.add(self.downbutton)
 
-	self.leftbutton = TextButton(60 + self.screenwidth - 280 + 16 + 16,0,0,0,16,16,"./pics/button-64x32.bmp","./pics/button-2-64x32.bmp",self.font,"Left")
+	self.leftbutton = TextButton(128 + self.screenwidth - self.tileboxw  ,0,0,0,64,32,"./pics/button-64x32.bmp","./pics/button-2-64x32.bmp",self.font,"Left")
 	self.leftbutton.connect(self.scrollleft, None)	
 	self.rootwidget.add(self.leftbutton)
 
-	self.rightbutton = TextButton(80 + self.screenwidth - 280 + 16 + 16 + 16,0,0,0,16,16,"./pics/button-64x32.bmp","./pics/button-2-64x32.bmp",self.font,"Right")
+	self.rightbutton = TextButton(192 + self.screenwidth - self.tileboxw   ,0,0,0,64,32,"./pics/button-64x32.bmp","./pics/button-2-64x32.bmp",self.font,"Right")
 	self.rightbutton.connect(self.scrollright, None)	
 	self.rootwidget.add(self.rightbutton)
 
-	self.printbutton = TextButton(100 + self.screenwidth - 280 + 16 + 16 + 16 + 16,0,0,0,16,16,"./pics/button-64x32.bmp","./pics/button-2-64x32.bmp",self.font,"Print")
-	self.rightbutton.connect(self.printtoconsole, None)	
+	self.printbutton = TextButton(256 + self.screenwidth - self.tileboxw    ,0,0,0,64,32,"./pics/button-64x32.bmp","./pics/button-2-64x32.bmp",self.font,"Print")
+	self.printbutton.connect(self.printtoconsole, None)	
 	self.rootwidget.add(self.printbutton)
 
 

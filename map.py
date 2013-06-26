@@ -35,7 +35,8 @@ class Map(Widget):
 	self.tiles = []
 
 	### generate the empty tables
-	self.generateemptytilelist()
+	if not self.tiles:
+		self.generateemptytilelist()
 
         self.background = pygame.image.load('./pics/blank.bmp').convert()
 

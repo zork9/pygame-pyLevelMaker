@@ -1,0 +1,6 @@
+. mapfiles can be put in tilerooms of pygame-pyZeldaII (http://github.com/zork9
+/pygame-pyZelda2)
+
+. You can easily hacking the reading of a file and the printing
+. You can print with the following shell command : './game.py >& mapfile'
+. Textwidgets or filein method for maps and mapsizes, it's easier to change the self.tiles = [] line in map.py to a map and deleting the line which generates a empty map (--> [])
