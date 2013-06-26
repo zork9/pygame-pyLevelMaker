@@ -52,21 +52,25 @@ class Game:
 	self.rootwidget = RootWidget(0,0,0,0,self.screenwidth,self.screenheight)
 	### FIX split args into procedures
 
-	self.upbutton = TextButton(self.screenwidth - 280,0,0,0,16,16,"./pics/tile-tree-1-16x16.bmp","./pics/tile-tree-2-16x16.bmp",self.font,"Up")
+	self.upbutton = TextButton(20 + self.screenwidth - 280,0,0,0,16,16,"./pics/tile-tree-1-16x16.bmp","./pics/tile-tree-2-16x16.bmp",self.font,"Up")
 	self.upbutton.connect(self.scrollup, None)	
 	self.rootwidget.add(self.upbutton)
 
-	self.downbutton = TextButton(self.screenwidth - 280 + 16,0,0,0,16,16,"./pics/tile-tree-1-16x16.bmp","./pics/tile-tree-2-16x16.bmp",self.font,"Down")
+	self.downbutton = TextButton(40 + self.screenwidth - 280 + 16,0,0,0,16,16,"./pics/tile-tree-1-16x16.bmp","./pics/tile-tree-2-16x16.bmp",self.font,"Down")
 	self.downbutton.connect(self.scrolldown, None)	
 	self.rootwidget.add(self.downbutton)
 
-	self.leftbutton = TextButton(self.screenwidth - 280 + 16 + 16,0,0,0,16,16,"./pics/tile-tree-1-16x16.bmp","./pics/tile-tree-2-16x16.bmp",self.font,"Left")
+	self.leftbutton = TextButton(60 + self.screenwidth - 280 + 16 + 16,0,0,0,16,16,"./pics/tile-tree-1-16x16.bmp","./pics/tile-tree-2-16x16.bmp",self.font,"Left")
 	self.leftbutton.connect(self.scrollleft, None)	
 	self.rootwidget.add(self.leftbutton)
 
-	self.rightbutton = TextButton(self.screenwidth - 280 + 16 + 16 + 16,0,0,0,16,16,"./pics/tile-tree-1-16x16.bmp","./pics/tile-tree-2-16x16.bmp",self.font,"Right")
+	self.rightbutton = TextButton(80 + self.screenwidth - 280 + 16 + 16 + 16,0,0,0,16,16,"./pics/tile-tree-1-16x16.bmp","./pics/tile-tree-2-16x16.bmp",self.font,"Right")
 	self.rightbutton.connect(self.scrollright, None)	
 	self.rootwidget.add(self.rightbutton)
+
+	self.printbutton = TextButton(100 + self.screenwidth - 280 + 16 + 16 + 16 + 16,0,0,0,16,16,"./pics/tile-tree-1-16x16.bmp","./pics/tile-tree-2-16x16.bmp",self.font,"Print")
+	self.rightbutton.connect(self.printtoconsole, None)	
+	self.rootwidget.add(self.printbutton)
 
 
         blankimage = pygame.image.load('./pics/blank.bmp').convert()
@@ -113,6 +117,10 @@ class Game:
 		self.tilebox.draw(screen)
 		self.rootwidget.draw(screen)
 	       	pygame.display.update()
+
+    def printtoconsole(self, args):
+	print "self.tilelist = "
+	print self.map.tiles
 
     def scrollup(self, args):
 	print "Scroll up!"
