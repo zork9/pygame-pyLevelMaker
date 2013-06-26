@@ -31,9 +31,12 @@ class Tilebox(TileboxBase):
 	### FIX wrap
     def sort(self):
 	xx = self.x 
-	yy = 0
+	yy = self.y 
 	for w in self.tiles:
-		w.x += xx  
+		w.x += xx 
+		w.x += self.bgoffsetx 
+		w.y += yy 
+		w.y += self.bgoffsety
 		xx += self.tilew 
 
     def gettilefromid(self, id):

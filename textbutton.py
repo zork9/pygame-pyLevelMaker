@@ -18,33 +18,29 @@ import pygame
 from pygame.locals import *
 from types import *
 from time import *
-from widget import *
+from button import *
 
-class Button(Widget):
+class TextButton(Button):
     ""
-    def __init__(self,xx,yy,relx,rely,ww,hh,upfilename,downfilename):
-        Widget.__init__(self,xx,yy,ww,hh)
+    def __init__(self,xx,yy,relx,rely,ww,hh,upfilename,downfilename,font,text):
+        Button.__init__(self,xx,yy,relx,rely,ww,hh,upfilename,downfilename)
         self.upimage = pygame.image.load(upfilename).convert()
         self.downimage = pygame.image.load(downfilename).convert()
 	self.image = self.upimage
-	self.cb = None
-	self.args = None
-
-	### a callback connected to the button, FIX make a list of callbacks
-    def connect(self,cb,args):
-	self.cb = cb		
-	self.args = args
+	self.text = text
+	self.font = font 
  
     def draw(self,screen):
-        screen.blit(self.image, (0+self.x, 0+self.y))
+	Button.draw(self, screen)
+	## FIX centering text
+	screen.blit(self.font.render(self.text, 8, (255,255,255)), (self.x,self.y))
+
 	Widget.draw(self,screen)
 
     def doclick(self):
-	self.image = self.downimage
-	if self.cb:
-		self.cb(self.args)
+	Button.doclick(self)
 
     def dounclick(self):
-	self.image = self.upimage
+	Button.dounclick(self)
 
 

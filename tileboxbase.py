@@ -27,9 +27,13 @@ class TileboxBase(Widget):
 	self.tiles = []
 #        self.relativex = xx
 #        self.relativey = yy 
- 
+        self.bgimage = pygame.image.load("./pics/levelmaker-border-1-300x600.bmp").convert()
+	self.bgoffsetx = 20 
+	self.bgoffsety = 20 
+
     def draw(self,screen):
 	### adda tilebox frame picture here
+        screen.blit(self.bgimage, (self.x, self.y))
 	Widget.draw(self, screen)	
 
 	for w in self.tiles:

@@ -45,7 +45,6 @@ class Map(Widget):
 
  
     def draw(self,screen,tilebox):
-	##print "x=%d" % self.relativex 
         screen.blit(self.background, (0+self.relativex, 0+self.relativey))
 	for yy in range(0, self.h / self.tileh): 
 		for xx in range(0, self.w / self.tilew): 

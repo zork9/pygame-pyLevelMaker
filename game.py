@@ -21,7 +21,8 @@ from map import *
 from tilebox import *
 from tile import *
 from rootwidget import *
-from button import *
+from textbutton import *
+
 
 class Game:
     "Main function"
@@ -31,25 +32,43 @@ class Game:
         pygame.init()
         pygame.font.init()
         screen = pygame.display.set_mode((self.screenwidth, self.screenheight))
-        font = pygame.font.SysFont("Times", 14)
+        self.font = pygame.font.SysFont("Times", 14)
 
 
 	self.tilew = 16
 	self.tileh = 16
 	self.selectedtile = None
 	self.tileboxw = 300
-	self.tilebox = Tilebox(self.screenwidth-self.tileboxw,0,self.tileboxw,0,self.tileboxw,self.screenheight)
+	self.tilebox = Tilebox(self.screenwidth-self.tileboxw,768-600,self.tileboxw,0,self.tileboxw,self.screenheight)
 	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.1,"./pics/tile-tree-1-16x16.bmp"))
 	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.2,"./pics/tile-tree-2-16x16.bmp"))
 	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.3,"./pics/tile-tree-3-16x16.bmp"))
 	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.4,"./pics/tile-tree-4-16x16.bmp"))
 	
-	self.rootwidget = RootWidget(0,0,0,0,self.screenwidth,self.screenheight)
-	self.rootwidget.add(Button(0,0,0,0,16,16,"./pics/tile-tree-1-16x16.bmp","./pics/tile-tree-2-16x16.bmp"))
-	self.map = Map(0,0,0,0,1024,768)
 	self.tilebox.sort()
+	self.map = Map(0,0,0,0,1024,768)
 	### self.rootwidget.add(self.map)
 	### self.rootwidget.add(self.tilebox)
+	self.rootwidget = RootWidget(0,0,0,0,self.screenwidth,self.screenheight)
+	### FIX split args into procedures
+
+	self.upbutton = TextButton(self.screenwidth - 280,0,0,0,16,16,"./pics/tile-tree-1-16x16.bmp","./pics/tile-tree-2-16x16.bmp",self.font,"Up")
+	self.upbutton.connect(self.scrollup, None)	
+	self.rootwidget.add(self.upbutton)
+
+	self.downbutton = TextButton(self.screenwidth - 280 + 16,0,0,0,16,16,"./pics/tile-tree-1-16x16.bmp","./pics/tile-tree-2-16x16.bmp",self.font,"Down")
+	self.downbutton.connect(self.scrolldown, None)	
+	self.rootwidget.add(self.downbutton)
+
+	self.leftbutton = TextButton(self.screenwidth - 280 + 16 + 16,0,0,0,16,16,"./pics/tile-tree-1-16x16.bmp","./pics/tile-tree-2-16x16.bmp",self.font,"Left")
+	self.leftbutton.connect(self.scrollleft, None)	
+	self.rootwidget.add(self.leftbutton)
+
+	self.rightbutton = TextButton(self.screenwidth - 280 + 16 + 16 + 16,0,0,0,16,16,"./pics/tile-tree-1-16x16.bmp","./pics/tile-tree-2-16x16.bmp",self.font,"Right")
+	self.rightbutton.connect(self.scrollright, None)	
+	self.rootwidget.add(self.rightbutton)
+
+
         blankimage = pygame.image.load('./pics/blank.bmp').convert()
         ## There are several title screens in the ./pics/ directory
         self.x = 0
@@ -75,13 +94,14 @@ class Game:
 				print "get_pos() = (%s,%s)" % (pos[0],pos[1])
 				
 				if pos[0] < self.tilebox.x and self.selectedtile:
-					self.map.put(self.selectedtile,pos[0],pos[1])
+					self.map.put(self.selectedtile,pos[0]-self.map.relativex,pos[1]-self.map.relativey)
 					flag = 1
 					print "selected tile !"
 	
-				if pos[0] > self.tilebox.x:	
+				if pos[0] > self.tilebox.x and pos[1] > self.tilebox.y:	
 					self.selectedtile = self.tilebox.get(pos[0],pos[1])
-				self.rootwidget.click(pos[0],pos[1])
+				if pos[0] > self.tilebox.x and pos[1] < self.tilebox.y:
+					self.rootwidget.click(pos[0],pos[1])
                		if event.type == pygame.MOUSEBUTTONUP:
 				sleep(0.2)
 				pos = pygame.mouse.get_pos()
@@ -93,6 +113,23 @@ class Game:
 		self.tilebox.draw(screen)
 		self.rootwidget.draw(screen)
 	       	pygame.display.update()
+
+    def scrollup(self, args):
+	print "Scroll up!"
+        self.map.relativey -= 10
+
+    def scrolldown(self, args):
+	print "Scroll Down!"
+        self.map.relativey += 10
+
+    def scrollleft(self, args):
+	print "Scroll left!"
+        self.map.relativex -= 10
+
+    def scrollright(self, args):
+	print "Scroll right!"
+        self.map.relativex += 10
+
 				    
 if __name__ == "__main__":
     foo = Game()
