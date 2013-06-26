@@ -23,11 +23,12 @@ from tileboxbase import *
 
 class Tilebox(TileboxBase):
     ""
-    def __init__(self,xx,yy,relx,rely):
-        TileboxBase.__init__(self,xx,yy,relx,rely)
+    def __init__(self,xx,yy,relx,rely,ww,hh):
+        TileboxBase.__init__(self,xx,yy,relx,rely,ww,hh)
 	self.tilew = 16
 	self.tileh = 16
 
+	### FIX wrap
     def sort(self):
 	xx = self.x 
 	yy = 0

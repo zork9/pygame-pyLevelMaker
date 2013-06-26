@@ -23,7 +23,7 @@ from widget import *
 class Map(Widget):
     "Room with a (big) map"
     def __init__(self,xx,yy,relx,rely,ww,hh):
-        Widget.__init__(self,xx,yy)
+        Widget.__init__(self,xx,yy,ww,hh)
 	self.tiles = []
         self.relativex = relx
         self.relativey = rely

@@ -32,11 +32,31 @@ class WidgetChildren:
 
 class Widget(WidgetChildren): 
     ""
-    def __init__(self,xx,yy):
+    def __init__(self,xx,yy,ww,hh):
 	WidgetChildren.__init__(self)
     	self.x = xx
 	self.y = yy
+    	self.w = ww 
+	self.h = hh 
 
     def draw(self,screen):
 	for w in self.list:
-		w.draw(screen) 
+		w.draw(screen)
+
+    def click(self, xx, yy):
+	if xx > self.x and xx < self.x + self.w	and yy > self.y and yy < self.y +self.h:
+		self.doclick()
+		return
+	### FIX return here , do not depth propagate	
+	for w in self.list:
+		w.click()
+
+    def unclick(self, xx, yy):
+	if xx > self.x and xx < self.x + self.w	and yy > self.y and yy < self.y +self.h:
+		self.dounclick()
+		return
+	for w in self.list:
+		w.click()
+
+
+	 

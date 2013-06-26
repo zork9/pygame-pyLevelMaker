@@ -22,8 +22,8 @@ from widget import *
 
 class TileboxBase(Widget):
     "Room with a (big) map"
-    def __init__(self,xx,yy,relx,rely):
-        Widget.__init__(self,xx,yy)
+    def __init__(self,xx,yy,relx,rely,ww,hh):
+        Widget.__init__(self,xx,yy,ww,hh)
 	self.tiles = []
 #        self.relativex = xx
 #        self.relativey = yy 

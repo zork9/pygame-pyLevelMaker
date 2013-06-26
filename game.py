@@ -20,6 +20,8 @@ from pygame.locals import *
 from map import *
 from tilebox import *
 from tile import *
+from rootwidget import *
+from button import *
 
 class Game:
     "Main function"
@@ -31,23 +33,31 @@ class Game:
         screen = pygame.display.set_mode((self.screenwidth, self.screenheight))
         font = pygame.font.SysFont("Times", 14)
 
+
+	self.tilew = 16
+	self.tileh = 16
 	self.selectedtile = None
 	self.tileboxw = 300
-	self.tilebox = Tilebox(self.screenwidth-self.tileboxw,0,self.tileboxw,0)
-	self.tilebox.addtile(Tile(0,0,0,0,3.1,"./pics/tile-tree-1-16x16.bmp"))
-	self.tilebox.addtile(Tile(0,0,0,0,3.2,"./pics/tile-tree-2-16x16.bmp"))
-	self.tilebox.addtile(Tile(0,0,0,0,3.3,"./pics/tile-tree-3-16x16.bmp"))
-	self.tilebox.addtile(Tile(0,0,0,0,3.4,"./pics/tile-tree-4-16x16.bmp"))
-
+	self.tilebox = Tilebox(self.screenwidth-self.tileboxw,0,self.tileboxw,0,self.tileboxw,self.screenheight)
+	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.1,"./pics/tile-tree-1-16x16.bmp"))
+	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.2,"./pics/tile-tree-2-16x16.bmp"))
+	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.3,"./pics/tile-tree-3-16x16.bmp"))
+	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.4,"./pics/tile-tree-4-16x16.bmp"))
+	
+	self.rootwidget = RootWidget(0,0,0,0,self.screenwidth,self.screenheight)
+	self.rootwidget.add(Button(0,0,0,0,16,16,"./pics/tile-tree-1-16x16.bmp","./pics/tile-tree-2-16x16.bmp"))
 	self.map = Map(0,0,0,0,1024,768)
 	self.tilebox.sort()
-
+	### self.rootwidget.add(self.map)
+	### self.rootwidget.add(self.tilebox)
         blankimage = pygame.image.load('./pics/blank.bmp').convert()
         ## There are several title screens in the ./pics/ directory
         self.x = 0
         self.y = 0
 	self.prevselect = None 
-	gameover = 0       
+	gameover = 0      
+	self.prevpos0 = -1
+	self.prevpos1 = -1 
         while gameover == 0:
 		flag = 0
 		self.prev = None
@@ -60,6 +70,8 @@ class Game:
 				return
                		if event.type == pygame.MOUSEBUTTONDOWN:
 				pos = pygame.mouse.get_pos()
+				self.prevpos0 = pos[0]
+				self.prevpos1 = pos[1]
 				print "get_pos() = (%s,%s)" % (pos[0],pos[1])
 				
 				if pos[0] < self.tilebox.x and self.selectedtile:
@@ -69,9 +81,17 @@ class Game:
 	
 				if pos[0] > self.tilebox.x:	
 					self.selectedtile = self.tilebox.get(pos[0],pos[1])
+				self.rootwidget.click(pos[0],pos[1])
+               		if event.type == pygame.MOUSEBUTTONUP:
+				sleep(0.2)
+				pos = pygame.mouse.get_pos()
+				### unclick the previously clicked widget
+				self.rootwidget.unclick(self.prevpos0,self.prevpos1)
+				###self.rootwidget.unclick(pos[0],pos[1])
 	
 		self.map.draw(screen,self.tilebox)
 		self.tilebox.draw(screen)
+		self.rootwidget.draw(screen)
 	       	pygame.display.update()
 				    
 if __name__ == "__main__":

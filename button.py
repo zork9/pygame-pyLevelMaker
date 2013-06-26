@@ -20,17 +20,22 @@ from types import *
 from time import *
 from widget import *
 
-class Tile(Widget):
-    "Room with a (big) map"
-    def __init__(self,xx,yy,relx,rely,ww,hh,id,filename):
+class Button(Widget):
+    ""
+    def __init__(self,xx,yy,relx,rely,ww,hh,upfilename,downfilename):
         Widget.__init__(self,xx,yy,ww,hh)
-	self.tiles = []
-	self.id = id
-###        self.relativex = x
-  ###      self.relativey = y 
-        self.image = pygame.image.load(filename).convert()
+        self.upimage = pygame.image.load(upfilename).convert()
+        self.downimage = pygame.image.load(downfilename).convert()
+	self.image = self.upimage
  
     def draw(self,screen):
-        ######screen.blit(self.image, (0+self.relativex, 0+self.relativey))
         screen.blit(self.image, (0+self.x, 0+self.y))
-	
+	Widget.draw(self,screen)
+
+    def doclick(self):
+	self.image = self.downimage
+
+    def dounclick(self):
+	self.image = self.upimage
+
+
