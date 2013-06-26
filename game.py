@@ -21,6 +21,7 @@ from map import *
 from buttonbox import *
 from tilebox import *
 from tile import *
+from hbox import *
 from rootwidget import *
 from textbutton import *
 
@@ -41,11 +42,22 @@ class Game:
 	self.selectedtile = None
 	self.tileboxw = 300
 	self.tilebox = Tilebox(self.screenwidth-self.tileboxw,768-600,self.tileboxw,0,self.tileboxw,self.screenheight)
-	self.buttonbox = Buttonbox(self.screenwidth-self.tileboxw,0,0,0,150,300)
+	self.buttonbox = hbox(self.screenwidth-self.tileboxw,0,0,0,150,300,"./pics/levelmaker-border-2-150x300.bmp")
 	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.1,"./pics/tile-tree-1-16x16.bmp"))
 	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.2,"./pics/tile-tree-2-16x16.bmp"))
 	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.3,"./pics/tile-tree-3-16x16.bmp"))
 	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.4,"./pics/tile-tree-4-16x16.bmp"))
+	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.5,"./pics/tile-grass-1-16x16.bmp"))
+	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.6,"./pics/tile-grass-2-16x16.bmp"))
+	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.7,"./pics/tile-grass-3-16x16.bmp"))
+	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.8,"./pics/tile-grass-4-16x16.bmp"))
+	### self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.9,"./pics/tile-grass-5-16x16.bmp"))
+	### self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.10,"./pics/tile-grass-6-16x16.bmp"))
+	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.11,"./pics/tile-grass-7-16x16.bmp"))
+	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.12,"./pics/tile-grass-8-16x16.bmp"))
+	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.13,"./pics/tile-grass-9-16x16.bmp"))
+	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.14,"./pics/tile-grass-10-16x16.bmp"))
+	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.15,"./pics/tile-grass-11-16x16.bmp"))
 	
 	self.tilebox.sort()
 	self.map = Map(0,0,0,0,1024,768)
