@@ -48,23 +48,29 @@ class Map(Widget):
     def loadfromfile(self, filename):
 	f = open(filename, 'r')
  	self.buffer = f.read()	
-	parsefile()
+	self.parsefile()
+	f.close()
 
     def parsefile(self):
 	if self.buffer:
 		i = 0
 		if self.buffer[i] != '[':
 			return 0 
-		for yy in range(0,self.w/self.tilew):
-			i += 1 # skip bracket	
-			for xx in range(0,self.h/self.tileh):
-				w = ""
-				while self.buffer[xx+i] != ',':
-					w += self.buffer[xx+i]
+		i += 1 # skip bracket	
+		for yy in range(0,self.h/self.tileh):
+			for xx in range(0,self.w/self.tilew):
+				while self.buffer[i] == ' ' or self.buffer[i] == ',' or self.buffer[i] == '[':
 					i += 1
-				self.tiles[yy][xx] = float(w) 
-				i = 0	
-
+				w = ""
+				while self.buffer[i] != ' ' and self.buffer[i] != ',' and self.buffer[i] != ']':
+					w += self.buffer[i]
+					i += 1
+				print ">%s" % w
+				if w != "":
+					self.tiles[yy][xx] = float(w)
+			 
+        print "123>" 
+        print "%s" % self.tiles
  
     def draw(self,screen,tilebox):
         screen.blit(self.background, (0+self.relativex, 0+self.relativey))

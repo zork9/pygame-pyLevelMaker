@@ -96,6 +96,13 @@ class Game:
 	self.printbutton.connect(self.printtoconsole, None)	
 	self.rootwidget.add(self.printbutton)
 
+	self.printtofilebutton = TextButton(0 + self.screenwidth - self.tileboxw    ,32,0,0,64,32,"./pics/button-64x32.bmp","./pics/button-2-64x32.bmp",self.font,"Fileout")
+	self.printtofilebutton.connect(self.printtofile, None)	
+	self.rootwidget.add(self.printtofilebutton)
+
+	self.readinfilebutton = TextButton(64 + self.screenwidth - self.tileboxw    ,32,0,0,64,32,"./pics/button-64x32.bmp","./pics/button-2-64x32.bmp",self.font,"Filein")
+	self.readinfilebutton.connect(self.readinfile, None)	
+	self.rootwidget.add(self.readinfilebutton)
 
         blankimage = pygame.image.load('./pics/blank-1024x768.bmp').convert()
         ## There are several title screens in the ./pics/ directory
@@ -147,6 +154,14 @@ class Game:
     def printtoconsole(self, args):
 	print "self.tilelist = "
 	print self.map.tiles
+
+    def printtofile(self, args):
+	f = open("./output.map", 'w+')
+	f.write(str(self.map.tiles))
+	f.close()
+
+    def readinfile(self, args):
+	self.map.loadfromfile('./output.map')
 
     def scrollup(self, args):
 	print "Scroll up!"
