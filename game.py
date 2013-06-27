@@ -97,7 +97,7 @@ class Game:
 	self.rootwidget.add(self.printbutton)
 
 
-        blankimage = pygame.image.load('./pics/blank.bmp').convert()
+        blankimage = pygame.image.load('./pics/blank-1024x768.bmp').convert()
         ## There are several title screens in the ./pics/ directory
         self.x = 0
         self.y = 0

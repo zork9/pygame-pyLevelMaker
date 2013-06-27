@@ -33,7 +33,7 @@ class Map(Widget):
 	self.tilew = 16
 	self.tileh = 16
 	self.tiles = []
-
+	self.buffer =  None
 	### generate the empty tables
 	if not self.tiles:
 		self.generateemptytilelist()
@@ -41,8 +41,29 @@ class Map(Widget):
         self.background = pygame.image.load('./pics/blank.bmp').convert()
 
     def put(self, tile, xx, yy):
-	self.tiles[yy /self.tileh][xx / self.tilew] = tile.id 
+	print "tiles x=%d y-%d" % (xx/self.tilew,yy/self.tileh)
+	self.tiles[yy / self.tileh][xx / self.tilew] = tile.id 
 	print "configured a tile!"
+
+    def loadfromfile(self, filename):
+	f = open(filename, 'r')
+ 	self.buffer = f.read()	
+	parsefile()
+
+    def parsefile(self):
+	if self.buffer:
+		i = 0
+		if self.buffer[i] != '[':
+			return 0 
+		for yy in range(0,self.w/self.tilew):
+			i += 1 # skip bracket	
+			for xx in range(0,self.h/self.tileh):
+				w = ""
+				while self.buffer[xx+i] != ',':
+					w += self.buffer[xx+i]
+					i += 1
+				self.tiles[yy][xx] = float(w) 
+				i = 0	
 
  
     def draw(self,screen,tilebox):

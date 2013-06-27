@@ -37,10 +37,10 @@ class Tilebox(TileboxBase):
 		w.x += self.bgoffsetx 
 		w.y += yy 
 		w.y += self.bgoffsety
+		xx += self.tilew 
 		if w.x % 300 >= 300-16: ### FIX
 			yy += self.tileh
 			xx = self.x
-		xx += self.tilew 
 
     def gettilefromid(self, id):
 	for tile in self.tiles:
