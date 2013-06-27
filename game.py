@@ -24,7 +24,7 @@ from tile import *
 from hbox import *
 from rootwidget import *
 from textbutton import *
-
+from config import *
 
 class Game:
     "Main function"
@@ -103,6 +103,8 @@ class Game:
 	self.readinfilebutton = TextButton(64 + self.screenwidth - self.tileboxw    ,32,0,0,64,32,"./pics/button-64x32.bmp","./pics/button-2-64x32.bmp",self.font,"Filein")
 	self.readinfilebutton.connect(self.readinfile, None)	
 	self.rootwidget.add(self.readinfilebutton)
+
+        self.config = Config('./pylevelmaker-config') 
 
         blankimage = pygame.image.load('./pics/blank-1024x768.bmp').convert()
         ## There are several title screens in the ./pics/ directory

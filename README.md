@@ -10,5 +10,5 @@ Game level maker software (for pygame-pyZeldaII at github.com)
 
 . run 'python game.py' in this directory to run the application or chmod +x game.py
 
-
+. the file pylevelmaker-config gets read for configuration
 . Filein and Fileout comes and goes into the output.map files in this directory 
