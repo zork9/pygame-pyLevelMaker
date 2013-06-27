@@ -22,13 +22,17 @@ from widget import *
 
 class Map(Widget):
     ""
-    def __init__(self,xx,yy,relx,rely,ww,hh):
+    def __init__(self,xx,yy,relx,rely,ww,hh,config):
         Widget.__init__(self,xx,yy,ww,hh)
 	self.tiles = []
         self.relativex = relx
         self.relativey = rely
-	self.w = ww
-	self.h = hh
+	if config:
+		self.w = config.mapwidth 
+		self.h = config.mapheight 
+	else:
+		self.w = ww 
+		self.h = hh 
 	### NOTE seperate in files 
 	self.tilew = 16
 	self.tileh = 16
@@ -65,12 +69,9 @@ class Map(Widget):
 				while self.buffer[i] != ' ' and self.buffer[i] != ',' and self.buffer[i] != ']':
 					w += self.buffer[i]
 					i += 1
-				print ">%s" % w
 				if w != "":
 					self.tiles[yy][xx] = float(w)
 			 
-        print "123>" 
-        print "%s" % self.tiles
  
     def draw(self,screen,tilebox):
         screen.blit(self.background, (0+self.relativex, 0+self.relativey))

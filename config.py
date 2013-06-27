@@ -25,8 +25,11 @@ class Config:
     def __init__(self,filename):
 	self.filename = filename
 	self.buffer = ""
+
+	self.mapwidth = 1024
+	self.mapheight = 768
+
 	self.load()
-	self.parsefile()
 	
     def load(self):
 	f = open(self.filename, 'r')
@@ -37,24 +40,27 @@ class Config:
     def parsefile(self):
 	wordsonline = []
 	if self.buffer:
-		i = -1
-		j = -1
-		idx = 0 
+		i = 0 
+		j = 0 
+		x = 0 
 		for c in self.buffer:
-			if c != '\n' and i < len(self.buffer):
-				print "%s" % c
-				i += 1
-				if c == ' ':
-					j = i-1
-						
-				wordsonline.append(self.getword(i,j))
-				idx += 1	
-			self.put(wordsonline)	
-			wordsonline = []
+			if c == ' ' or c == '\n':
+				x = j
+				j = i
+				wordsonline.append(self.getword(x,j))
+			i += 1
+		self.put(wordsonline)	
 
     def getword(self, i,j):
 	return self.buffer[i:j]
 
     def put(self, wordsonline):
-	if wordsonline and wordsonline[0] == "mapwidth":
-		self.mapwidth = int(wordsonline[1])		
+	print "words=%s" % wordsonline
+	for n in range(0, len(wordsonline)):
+		print "n=%d" % n
+		if wordsonline[n] == "mapwidth":
+			self.mapwidth = int(wordsonline[n+1])	
+			print "Configged mapwidth at : %d" % self.mapwidth	
+		elif wordsonline[n] == "mapheight":
+			self.mapheight = int(wordsonline[n+1])	
+			print "Configged mapheight at : %d" % self.mapheight

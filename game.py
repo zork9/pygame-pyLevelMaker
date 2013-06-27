@@ -69,7 +69,10 @@ class Game:
 	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.24,"./pics/tile-border-9-16x16.bmp"))
 	
 	self.tilebox.sort()
-	self.map = Map(0,0,0,0,1024,768)
+
+        self.config = Config('./pylevelmaker-config') 
+
+	self.map = Map(0,0,0,0,1024,768,self.config) ## NOTE default w and h
 	### self.rootwidget.add(self.map)
 	self.rootwidget = RootWidget(0,0,0,0,self.screenwidth,self.screenheight)
 	self.rootwidget.add(self.buttonbox)
@@ -103,8 +106,6 @@ class Game:
 	self.readinfilebutton = TextButton(64 + self.screenwidth - self.tileboxw    ,32,0,0,64,32,"./pics/button-64x32.bmp","./pics/button-2-64x32.bmp",self.font,"Filein")
 	self.readinfilebutton.connect(self.readinfile, None)	
 	self.rootwidget.add(self.readinfilebutton)
-
-        self.config = Config('./pylevelmaker-config') 
 
         blankimage = pygame.image.load('./pics/blank-1024x768.bmp').convert()
         ## There are several title screens in the ./pics/ directory
