@@ -1,3 +1,6 @@
+
+. tilebox and tilesheetbox should become seperate widgets without chaning the map.py etc.
+
 . mapfiles can be put in tilerooms of pygame-pyZeldaII (http://github.com/zork9
 /pygame-pyZelda2)
 

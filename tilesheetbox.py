@@ -60,7 +60,7 @@ class Tilesheetbox(TileboxBase):
 					k += 1
 				l += 1
 			self.surfaces[y*self.surfacesw+x] = surfacepxarray
-			self.tiles.append(TileSurface(0+xoff,0+yoff,0,0,self.tilew,self.tileh,1,self.surfaces[y*self.surfacesw+x]))
+			self.tiles.append(TileSurface(self.x+xoff+self.bgoffsetx,self.y+yoff+self.bgoffsety,0,0,self.tilew,self.tileh,x+self.tilew*y,self.surfaces[y*self.surfacesw+x]))
 			xoff += self.tilew
 		yoff += self.tileh
 
@@ -85,5 +85,5 @@ class Tilesheetbox(TileboxBase):
     def getimage(self, id):
 	for tile in self.tiles:
 		if tile.id == id:
-			return tile.image
+			return tile.surface
 	return None

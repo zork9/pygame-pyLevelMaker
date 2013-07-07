@@ -42,8 +42,9 @@ class Game:
 	self.tileh = 16
 	self.selectedtile = None
 	self.tileboxw = 300
-	self.tilebox = Tilebox(self.screenwidth-self.tileboxw,768-600,self.tileboxw,0,self.tileboxw,self.screenheight)
-	self.tilesheetbox = Tilesheetbox(self.screenwidth-self.tileboxw,768-300,self.tileboxw,0,self.tileboxw,self.screenheight)
+	self.tilebox = Tilebox(self.screenwidth-self.tileboxw,768-300,self.tileboxw,0,self.tileboxw,self.screenheight)
+	### FIX tilesheet box draws over tilebox
+	self.tilesheetbox = Tilesheetbox(self.screenwidth-self.tileboxw,768-600,self.tileboxw,0,self.tileboxw,self.screenheight)
 	self.buttonbox = hbox(self.screenwidth-self.tileboxw,0,0,0,150,300,"./pics/levelmaker-border-2-150x300.bmp")
 	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.1,"./pics/tile-tree-1-16x16.bmp"))
 	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.2,"./pics/tile-tree-2-16x16.bmp"))
@@ -134,17 +135,27 @@ class Game:
 				pos = pygame.mouse.get_pos()
 				self.prevpos0 = pos[0]
 				self.prevpos1 = pos[1]
-				print "get_pos() = (%s,%s)" % (pos[0],pos[1])
+				print "get_pos() = (%s,%s,%s,%s)" % (pos[0],pos[1],self.tilesheetbox.x,self.tilesheetbox.y)
 				
-				if pos[0] < self.tilebox.x and self.selectedtile:
+				if pos[0] < self.tilesheetbox.x and self.selectedtile:
 					self.map.put(self.selectedtile,pos[0]-self.map.relativex,pos[1]-self.map.relativey)
 					flag = 1
 					print "selected tile !"
 	
-				if pos[0] > self.tilebox.x and pos[1] > self.tilebox.y:	
-					self.selectedtile = self.tilebox.get(pos[0],pos[1])
-				if pos[0] > self.tilebox.x and pos[1] < self.tilebox.y:
+				if pos[0] > self.tilesheetbox.x and pos[1] > self.tilesheetbox.y:	
+					self.selectedtile = self.tilesheetbox.get(pos[0],pos[1])
+				if pos[0] > self.tilesheetbox.x and pos[1] < self.tilesheetbox.y:
 					self.rootwidget.click(pos[0],pos[1])
+
+####				if pos[0] < self.tilebox.x and self.selectedtile:
+####					self.map.put(self.selectedtile,pos[0]-self.map.relativex,pos[1]-self.map.relativey)
+####					flag = 1
+####					print "selected tile !"
+	
+####				if pos[0] > self.tilebox.x and pos[1] > self.tilebox.y:	
+####					self.selectedtile = self.tilebox.get(pos[0],pos[1])
+####				if pos[0] > self.tilebox.x and pos[1] < self.tilebox.y:
+####					self.rootwidget.click(pos[0],pos[1])
 
                		if event.type == pygame.MOUSEBUTTONUP:
 				sleep(0.2)
@@ -154,7 +165,9 @@ class Game:
 				###self.rootwidget.unclick(pos[0],pos[1])
 	
             	screen.blit(blankimage, (0,0))
-		self.map.draw(screen,self.tilebox)
+		### FIX dispatch self.tilebox! self.map.draw(screen,self.tilebox)
+		self.map.draw(screen,self.tilesheetbox)
+		### FIX sheetbox is above box
 		self.tilebox.draw(screen)
 		self.tilesheetbox.draw(screen)
 		self.rootwidget.draw(screen)

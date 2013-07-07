@@ -31,5 +31,6 @@ class TileSurface(Widget):
         self.surface = surface 
  
     def draw(self,screen):
+	### FIX make_surface
         screen.blit(self.surface.make_surface(), (0+self.x, 0+self.y))
 	

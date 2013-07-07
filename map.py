@@ -76,16 +76,17 @@ class Map(Widget):
     def draw(self,screen,tilebox):
         screen.blit(self.background, (0+self.relativex, 0+self.relativey))
 	for yy in range(0, self.h / self.tileh): 
-		for xx in range(0, self.w / self.tilew): 
+		for xx in range(0, self.w / self.tilew):
+			### FIX make_surface
         		t = tilebox.getimage(self.tiles[yy][xx])
         		if t:
-				screen.blit(t, (xx*self.tilew+self.relativex, yy*self.tileh+self.relativey))
+				screen.blit(t.make_surface(), (xx*self.tilew+self.relativex, yy*self.tileh+self.relativey))
 			
     def generateemptytilelist(self):
 	for yy in range(0,self.h / self.tileh):
 		l = []
 		for xx in range(0,self.w / self.tilew):
-			l.append(0)
+			l.append(-1)
 		self.tiles.append(l)
 	### print "tilelist=%s" % self.tiles
 
