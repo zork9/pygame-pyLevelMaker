@@ -1,5 +1,5 @@
 
-# Copyright (C) Johan Ceuppens 2010
+# Copyright (C) Johan Ceuppens 2010-2013
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -29,8 +29,8 @@ class Tilesheetbox(TileboxBase):
 	self.tilew = 16
 	self.tileh = 16
 
-	self.surfacesw = 10
-	self.surfacesh = 10
+	self.surfacesw = 22 
+	self.surfacesh = 22 
 	self.surfaces = []
 	for y in range(0,self.surfacesh):
 		for x in range(0,self.surfacesw):
