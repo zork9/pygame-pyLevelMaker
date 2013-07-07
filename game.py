@@ -42,8 +42,8 @@ class Game:
 	self.tileh = 16
 	self.selectedtile = None
 	self.tileboxw = 300
-	##### FIX self.tilebox = Tilebox(self.screenwidth-self.tileboxw,768-600,self.tileboxw,0,self.tileboxw,self.screenheight)
-	self.tilebox = Tilesheetbox(self.screenwidth-self.tileboxw,768-600,self.tileboxw,0,self.tileboxw,self.screenheight)
+	self.tilebox = Tilebox(self.screenwidth-self.tileboxw,768-600,self.tileboxw,0,self.tileboxw,self.screenheight)
+	self.tilesheetbox = Tilesheetbox(self.screenwidth-self.tileboxw,768-600,self.tileboxw+100,0,self.tileboxw,self.screenheight)
 	self.buttonbox = hbox(self.screenwidth-self.tileboxw,0,0,0,150,300,"./pics/levelmaker-border-2-150x300.bmp")
 	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.1,"./pics/tile-tree-1-16x16.bmp"))
 	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.2,"./pics/tile-tree-2-16x16.bmp"))
@@ -156,6 +156,7 @@ class Game:
             	screen.blit(blankimage, (0,0))
 		self.map.draw(screen,self.tilebox)
 		self.tilebox.draw(screen)
+		self.tilesheetbox.draw(screen)
 		self.rootwidget.draw(screen)
 	       	pygame.display.update()
 

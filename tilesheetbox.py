@@ -18,6 +18,7 @@ import pygame
 from pygame.locals import *
 from types import *
 from time import *
+from tilesurface import *
 from widget import *
 from tileboxbase import *
 
@@ -55,8 +56,8 @@ class Tilesheetbox(TileboxBase):
 				for j in range(0,self.tilew):
 					surfacepxarray[j,i] = pxarray[j,i]
 
-			self.surfaces[y*self.surfacesw+x] = surfacepxarray 
-			###surfacepxarray = []
+			self.surfaces[y*self.surfacesw+x] = surfacepxarray
+			self.tiles.append(TileSurface(0,0,0,0,self.tilew,self.tileh,1,self.surfaces[y*self.surfacesw+x]))
 			yoff += self.tileh
 		xoff += self.tilew
 
