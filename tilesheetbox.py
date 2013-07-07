@@ -34,8 +34,6 @@ class Tilesheetbox(TileboxBase):
 	self.surfaces = []
 	for y in range(0,self.surfacesh):
 		for x in range(0,self.surfacesw):
-			### surface = pygame.Surface((self.tilew,self.tileh))
-			### self.surfaces.append(surface)
 			self.surfaces.append(None)
 
         self.tilesimage = pygame.image.load("./pics/tilesheet1.bmp").convert()
@@ -44,7 +42,6 @@ class Tilesheetbox(TileboxBase):
 	### FIX surface.get_bounding_rect
     def splitintosurfaces(self):
 	pxarray = pygame.PixelArray(self.tilesimage)
-	surfacepxarray = pygame.PixelArray(pygame.Surface((self.tilew,self.tileh))) 
 
 	xoff = 0
 	yoff = 0
@@ -53,10 +50,15 @@ class Tilesheetbox(TileboxBase):
 		xoff = 0
 		for x in range(0,self.surfacesw):
 			surface = pygame.Surface((self.tilew,self.tileh))
-			for i in range(0,self.tileh):
-				for j in range(0,self.tilew):
-					surfacepxarray[j,i] = pxarray[j,i]
-
+			k = 0
+			l = 0
+			surfacepxarray = pygame.PixelArray(pygame.Surface((self.tilew,self.tileh))) 
+			for i in range(0+yoff,self.tileh+yoff):
+				k = 0
+				for j in range(xoff+0,xoff+self.tilew):
+					surfacepxarray[k,l] = pxarray[j,i]
+					k += 1
+				l += 1
 			self.surfaces[y*self.surfacesw+x] = surfacepxarray
 			self.tiles.append(TileSurface(0+xoff,0+yoff,0,0,self.tilew,self.tileh,1,self.surfaces[y*self.surfacesw+x]))
 			xoff += self.tilew

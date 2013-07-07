@@ -43,7 +43,7 @@ class Game:
 	self.selectedtile = None
 	self.tileboxw = 300
 	self.tilebox = Tilebox(self.screenwidth-self.tileboxw,768-600,self.tileboxw,0,self.tileboxw,self.screenheight)
-	self.tilesheetbox = Tilesheetbox(self.screenwidth-self.tileboxw,768-600,self.tileboxw+100,0,self.tileboxw,self.screenheight)
+	self.tilesheetbox = Tilesheetbox(self.screenwidth-self.tileboxw,768-300,self.tileboxw,0,self.tileboxw,self.screenheight)
 	self.buttonbox = hbox(self.screenwidth-self.tileboxw,0,0,0,150,300,"./pics/levelmaker-border-2-150x300.bmp")
 	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.1,"./pics/tile-tree-1-16x16.bmp"))
 	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.2,"./pics/tile-tree-2-16x16.bmp"))
