@@ -20,6 +20,7 @@ from pygame.locals import *
 from map import *
 from buttonbox import *
 from tilebox import *
+from tilesheetbox import *
 from tile import *
 from hbox import *
 from rootwidget import *
@@ -41,7 +42,8 @@ class Game:
 	self.tileh = 16
 	self.selectedtile = None
 	self.tileboxw = 300
-	self.tilebox = Tilebox(self.screenwidth-self.tileboxw,768-600,self.tileboxw,0,self.tileboxw,self.screenheight)
+	##### FIX self.tilebox = Tilebox(self.screenwidth-self.tileboxw,768-600,self.tileboxw,0,self.tileboxw,self.screenheight)
+	self.tilebox = Tilesheetbox(self.screenwidth-self.tileboxw,768-600,self.tileboxw,0,self.tileboxw,self.screenheight)
 	self.buttonbox = hbox(self.screenwidth-self.tileboxw,0,0,0,150,300,"./pics/levelmaker-border-2-150x300.bmp")
 	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.1,"./pics/tile-tree-1-16x16.bmp"))
 	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.2,"./pics/tile-tree-2-16x16.bmp"))
@@ -67,8 +69,11 @@ class Game:
 	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.22,"./pics/tile-border-7-16x16.bmp"))
 	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.23,"./pics/tile-border-8-16x16.bmp"))
 	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.24,"./pics/tile-border-9-16x16.bmp"))
-	
-	self.tilebox.sort()
+	#############################
+	# Minish Cap tiles
+	#############################
+	self.tilebox.addtile(Tile(0,0,0,0,self.tilew,self.tileh,3.25,"./pics/tile2-grass-1-16x16.bmp"))
+	### FIX self.tilebox.sort()
 
         self.config = Config('./pylevelmaker-config') 
 
