@@ -50,6 +50,7 @@ class Tilesheetbox(TileboxBase):
 	yoff = 0
 
 	for y in range(0,self.surfacesh):
+		xoff = 0
 		for x in range(0,self.surfacesw):
 			surface = pygame.Surface((self.tilew,self.tileh))
 			for i in range(0,self.tileh):
@@ -57,9 +58,9 @@ class Tilesheetbox(TileboxBase):
 					surfacepxarray[j,i] = pxarray[j,i]
 
 			self.surfaces[y*self.surfacesw+x] = surfacepxarray
-			self.tiles.append(TileSurface(0,0,0,0,self.tilew,self.tileh,1,self.surfaces[y*self.surfacesw+x]))
-			yoff += self.tileh
-		xoff += self.tilew
+			self.tiles.append(TileSurface(0+xoff,0+yoff,0,0,self.tilew,self.tileh,1,self.surfaces[y*self.surfacesw+x]))
+			xoff += self.tilew
+		yoff += self.tileh
 
 
     def getid(self,xx,yy):
