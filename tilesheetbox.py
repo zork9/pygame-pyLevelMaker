@@ -29,8 +29,8 @@ class Tilesheetbox(TileboxBase):
 	self.tilew = 16
 	self.tileh = 16
 
-	self.surfacesw = 22 
-	self.surfacesh = 22 
+	self.surfacesw = 20 
+	self.surfacesh = 20 
 	self.surfaces = []
 	for y in range(0,self.surfacesh):
 		for x in range(0,self.surfacesw):
@@ -53,9 +53,9 @@ class Tilesheetbox(TileboxBase):
 			k = 0
 			l = 0
 			surfacepxarray = pygame.PixelArray(pygame.Surface((self.tilew,self.tileh))) 
-			for i in range(0+yoff,self.tileh+yoff):
+			for i in range(0+yoff,self.tileh+yoff-1):
 				k = 0
-				for j in range(xoff+0,xoff+self.tilew):
+				for j in range(xoff+0,xoff+self.tilew-1):
 					surfacepxarray[k,l] = pxarray[j,i]
 					k += 1
 				l += 1
