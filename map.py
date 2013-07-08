@@ -82,7 +82,7 @@ class Map(Widget):
 			### FIX make_surface
         		t = tilebox.getimage(self.tiles[yy][xx])
         		if t:
-				screen.blit(t.make_surface(), (xx*(self.tilew-1)+self.relativex, yy*(self.tileh-1)+self.relativey))
+				screen.blit(t.make_surface(), (xx*(self.tilew)+self.relativex, yy*(self.tileh)+self.relativey))
 			
     def generateemptytilelist(self):
 	for yy in range(0,self.h / self.tileh):
