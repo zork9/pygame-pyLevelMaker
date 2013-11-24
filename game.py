@@ -117,7 +117,8 @@ class Game:
         ## There are several title screens in the ./pics/ directory
         self.x = 0
         self.y = 0
-	self.prevselect = None 
+	self.prevselect = None
+	self.lastdownpos = (-10,-10) 
 	gameover = 0      
 	self.prevpos0 = -1
 	self.prevpos1 = -1 
@@ -133,6 +134,8 @@ class Game:
 				return
                		if event.type == pygame.MOUSEBUTTONDOWN:
 				pos = pygame.mouse.get_pos()
+				self.lastdownpos = pos
+
 				self.prevpos0 = pos[0]
 				self.prevpos1 = pos[1]
 				print "get_pos() = (%s,%s,%s,%s)" % (pos[0],pos[1],self.tilesheetbox.x,self.tilesheetbox.y)
@@ -158,11 +161,17 @@ class Game:
 ####					self.rootwidget.click(pos[0],pos[1])
 
                		if event.type == pygame.MOUSEBUTTONUP:
-				sleep(0.2)
+				####sleep(0.2)
 				pos = pygame.mouse.get_pos()
 				### unclick the previously clicked widget
 				self.rootwidget.unclick(self.prevpos0,self.prevpos1)
-				###self.rootwidget.unclick(pos[0],pos[1])
+
+				for p1 in range(self.prevpos1, pos[1]):
+					for p2 in range(self.prevpos0, pos[0]):
+						print "--->" 
+						print p1
+						self.rootwidget.unclick(p2,p1)
+
 	
             	screen.blit(blankimage, (0,0))
 		### FIX dispatch self.tilebox! self.map.draw(screen,self.tilebox)
